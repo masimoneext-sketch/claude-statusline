@@ -2,7 +2,9 @@
 
 A multi-line dashboard status line for [Claude Code](https://claude.ai/claude-code) CLI.
 
-![bash](https://img.shields.io/badge/bash-script-green)
+Cross-platform: works on **Linux**, **macOS**, and **Windows** (PowerShell).
+
+![bash](https://img.shields.io/badge/bash-Linux%20%7C%20macOS-green) ![powershell](https://img.shields.io/badge/powershell-Windows-blue)
 
 ## Features
 
@@ -26,19 +28,28 @@ A multi-line dashboard status line for [Claude Code](https://claude.ai/claude-co
 
 ## Requirements
 
+### Linux / macOS
+
 - `jq` — JSON parser
 - `bc` — calculator for token/cost formatting
 
+### Windows
+
+- PowerShell 5.1+ or PowerShell 7+ (no extra dependencies)
+- Windows Terminal recommended for emoji and color support
+
 ## Installation
 
-1. Copy `statusline-command.sh` to `~/.claude/`:
+### Linux / macOS
+
+1. Copy the script:
 
 ```bash
 cp statusline-command.sh ~/.claude/statusline-command.sh
 chmod +x ~/.claude/statusline-command.sh
 ```
 
-2. Add the status line command to your Claude Code settings (`~/.claude/settings.json`):
+2. Add to your Claude Code settings (`~/.claude/settings.json`):
 
 ```json
 {
@@ -48,13 +59,31 @@ chmod +x ~/.claude/statusline-command.sh
 }
 ```
 
+### Windows (PowerShell)
+
+1. Copy the script:
+
+```powershell
+Copy-Item statusline-command.ps1 "$env:USERPROFILE\.claude\statusline-command.ps1"
+```
+
+2. Add to your Claude Code settings (`%USERPROFILE%\.claude\settings.json`):
+
+```json
+{
+  "statusline": {
+    "command": "powershell -NoProfile -File \"%USERPROFILE%\\.claude\\statusline-command.ps1\""
+  }
+}
+```
+
 3. Restart Claude Code.
 
 ## Customization
 
 - **USD_TO_EUR** — change the conversion rate (default: `0.91`)
-- **Color thresholds** — edit `pick_color()` to adjust green/yellow/red breakpoints
-- **Bar width** — change the second argument in `make_bar()` calls
+- **Color thresholds** — edit `pick_color()` / `Pick-Color` to adjust green/yellow/red breakpoints
+- **Bar width** — change the width argument in `make_bar()` / `Make-Bar` calls
 
 ## License
 
